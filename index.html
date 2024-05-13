@@ -1,27 +1,76 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>My Simple HTML Page</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f0f0f0;
-                padding: 20px;
-            }
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Page with Layout</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f4f4f9;
+    }
+    .navbar {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+    }
+    .row {
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+    }
+    .column {
+        background-color: #ddd;
+        padding: 20px;
+        flex: 1; /* Ensures equal width */
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #666;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #555;
+        color: white;
+    }
+</style>
+</head>
+<body>
 
-            h1 {
-                color: #333;
-            }
+<div class="navbar">My Navigation Bar</div>
 
-            p {
-                color: #666;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Welcome to My Simple HTML Page!</h1>
-        <p>This is a simple HTML page created by ChatGPT.</p>
-        <p>It doesn't do much yet, but it's a good starting point for learning about HTML, CSS, and more!</p>
-    </body>
+<div class="row">
+    <div class="column">Column 1</div>
+    <div class="column">Column 2</div>
+    <div class="column">Column 3</div>
+</div>
+
+<div class="row">
+    <table>
+        <tr>
+            <th>Header 1</th>
+            <th>Header 2</th>
+            <th>Header 3</th>
+        </tr>
+        <tr>
+            <td>Data 1</td>
+            <td>Data 2</td>
+            <td>Data 3</td>
+        </tr>
+        <tr>
+            <td>Data 4</td>
+            <td>Data 5</td>
+            <td>Data 6</td>
+        </tr>
+    </table>
+</div>
+
+</body>
 </html>
