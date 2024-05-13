@@ -1,76 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interactive Page with Layout</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: #f4f4f9;
-    }
-    .navbar {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        text-align: center;
-    }
-    .row {
-        display: flex;
-        justify-content: space-around;
-        margin: 20px 0;
-    }
-    .column {
-        background-color: #ddd;
-        padding: 20px;
-        flex: 1; /* Ensures equal width */
-        text-align: center;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        border: 1px solid #666;
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #555;
-        color: white;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Auto-Highlight Table with Unique Colors</title>
+    <style>
+        body {
+            padding-top: 70px; /* Offset for fixed navbar */
+        }
+    </style>
 </head>
 <body>
 
-<div class="navbar">My Navigation Bar</div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Logo Here</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Button 1</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Button 2</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Button 3</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Button 4</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Button 5</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Button 6</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container mt-4">
+        <div class="row text-center g-3">
+            <div class="col-md-4 d-flex align-items-stretch">
+                <input type="text" class="form-control full-height-input" placeholder="Enter text here...">
+            </div>
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item">Item 1</li>
+                    <li class="list-group-item">Item 2</li>
+                    <li class="list-group-item">Item 3</li>
+                    <li class="list-group-item">Item 4</li>
+                    <li class="list-group-item">Item 5</li>
+                    <li class="list-group-item">Item 6</li>
+                    <li class="list-group-item">Item 7</li>
+                    <li class="list-group-item">Item 8</li>
+                    <li class="list-group-item">Item 9</li>
+                    <li class="list-group-item">Item 10</li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option>Select Option</option>
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="column">Column 1</div>
-    <div class="column">Column 2</div>
-    <div class="column">Column 3</div>
-</div>
-
-<div class="row">
-    <table>
-        <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-            <th>Header 3</th>
-        </tr>
-        <tr>
-            <td>Data 1</td>
-            <td>Data 2</td>
-            <td>Data 3</td>
-        </tr>
-        <tr>
-            <td>Data 4</td>
-            <td>Data 5</td>
-            <td>Data 6</td>
-        </tr>
+<div class="container mt-4">
+    <table class="table table-hover" id="dataTable">
+        <thead class="table-dark">
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+                <th>Header 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Data 123</td>
+                <td>Data 456</td>
+                <td>Data 789 Data 456</td>
+            </tr>
+            <tr>
+                <td>Data 456</td>
+                <td>Data 123</td>
+                <td>Data 234</td>
+            </tr>
+            <tr>
+                <td>Data 789</td>
+                <td>Data 234</td>
+                <td>Data 567</td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.getElementById('dataTable');
+        const columnsToConsider = [1,2, 3]; // Specify the exact columns to consider, e.g., column 2 and column 4
+        let numberColors = {};
+    
+        // Function to generate a light color
+        function getRandomColor() {
+            // Generate each color component in the high range (156 to 255) to ensure lightness
+            const r = Math.floor(Math.random() * 100) + 156; // Red
+            const g = Math.floor(Math.random() * 100) + 156; // Green
+            const b = Math.floor(Math.random() * 100) + 156; // Blue
+            return `rgb(${r},${g},${b})`; // Return as rgb format
+        }
+    
+        // Extract numbers and assign colors from specified columns
+        columnsToConsider.forEach(index => {
+            let cells = table.querySelectorAll(`tbody tr td:nth-child(${index})`); // Selects cells only in specified columns
+            cells.forEach(cell => {
+                const numbers = cell.textContent.match(/\d+/g) || [];
+                numbers.forEach(number => {
+                    if (!numberColors[number]) {
+                        numberColors[number] = getRandomColor();
+                    }
+                });
+            });
+        });
+    
+        // Apply colors based on numbers to specified columns
+        columnsToConsider.forEach(index => {
+            let cells = table.querySelectorAll(`tbody tr td:nth-child(${index})`);
+            cells.forEach(cell => {
+                const numbers = cell.textContent.match(/\d+/g) || [];
+                if (numbers.length > 0) {
+                    let cellColor = numberColors[numbers[0]]; // Use the first number for color
+                    cell.style.backgroundColor = cellColor;
+                }
+            });
+        });
+    });
+    </script>
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
